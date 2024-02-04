@@ -165,11 +165,11 @@ function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
 
       const likesRef = ref(database, `Endorsements/${itemid}/likes`);
 
-      set(likesRef, `🖤 ${currentLikes}`);
+      set(likesRef, `♡ ${currentLikes}`);
 
       localStorage.setItem(itemid, "liked");
 
-      span2.textContent = `🖤 ${currentLikes}`;
+      span2.textContent = `♡ ${currentLikes}`;
     } else {
       currentLikes--;
 
