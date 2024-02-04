@@ -1,0 +1,165 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000000;
+  user-select: none;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.container {
+  width: 95%;
+  margin-inline: auto;
+  max-width: 317px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+h1 {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.5625rem;
+  margin-top: 0.75em;
+}
+
+.imgs {
+  width: 5.625rem;
+  height: 5.625rem;
+  display: block;
+  margin-top: 1em;
+}
+
+.section-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-bottom: 1.5em;
+}
+
+::placeholder {
+  color: #8f8f8f;
+}
+
+.msg,
+.from,
+.to {
+  border-radius: 8px;
+  padding: 1em;
+  background: #444059;
+  color: #fff;
+  border: none;
+}
+
+.msg {
+  font-weight: 400;
+  font-size: 0.9375rem;
+}
+
+.from,
+.to {
+  width: 47%;
+  text-align: center;
+}
+
+.input-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.section-2 {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+h2 {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 1em;
+}
+
+.sticky {
+  z-index: 1000;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #000;
+  padding: 0.5em 0;
+}
+
+.list {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-around;
+  height: 100%;
+  gap: 1em;
+}
+
+ul li {
+  background-color: #fff;
+  padding: 1em;
+  font-weight: 400;
+  color: #1b1924;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.btn-style {
+  background: #28a9f1;
+  color: #04131c;
+  font-weight: 700;
+  font-family: inherit;
+  font-size: 1.375rem;
+  padding: 0.5em 0;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-style:active {
+  transform: translate(0px, 3px);
+}
+
+.ul-div-to,
+.ul-div-from,
+.ul-div-msg {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  color: #1b1924;
+  font-size: 0.875rem;
+}
+
+.ul-div-msg {
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.ul-div-msg:active {
+  transform: translate(0, 3px);
+}
+
+.span2 {
+  cursor: pointer;
+}
+
+.span2:active {
+  transform: translate(0, 2px);
+}
+
+.ul-div-from {
+  display: flex;
+  justify-content: space-between;
+}

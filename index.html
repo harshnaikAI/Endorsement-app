@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Josefin+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="index.css" />
+
+    <title>Endorsements</title>
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>We are the Champions</h1>
+        <img
+          src="imgs/champ.png"
+          alt="white background image of an man standing in V shape and right hand upwards"
+          width="650"
+          height="650"
+          class="imgs"
+        />
+      </header>
+      <section class="section-1">
+        <textarea
+          name="msg"
+          id="msg"
+          cols="15"
+          rows="5"
+          class="msg"
+          placeholder="Write your endorsement here"
+        ></textarea>
+        <div class="input-wrap">
+          <input type="text" class="from input" placeholder="From" id="from" />
+          <input type="text" class="to input" placeholder="To" id="to" />
+        </div>
+        <button class="btn btn-style" id="btn">Publish</button>
+      </section>
+      <section class="section-2">
+        <h2 class="endorsements" id="header">- Endorsements -</h2>
+        <ul id="list" class="list"></ul>
+      </section>
+    </main>
+    <script src="index.js" type="module"></script>
+  </body>
+</html>
