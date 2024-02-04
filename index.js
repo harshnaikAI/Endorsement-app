@@ -181,61 +181,6 @@ function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
 
       localStorage.removeItem(itemid);
     }
-
-    ///////////////
-
-    // currentLikes++;
-    // const likesRef = ref(database, `Endorsements/${itemid}/likes`);
-
-    // set(likesRef, `🖤 ${currentLikes}`);
-
-    // span2.textContent = `🖤 ${currentLikes}`;
-
-    //////////////////
-    // if (currentLikes === 0 && !localStorage.getItem(userid)) {
-    //   currentLikes++;
-
-    //   const likesRef = ref(database, `Endorsements/${itemid}/likes`);
-
-    //   set(likesRef, `🖤 ${currentLikes}`);
-
-    //   span2.textContent = `🖤 ${currentLikes}`;
-
-    //   localStorage.setItem(userid, "liked");
-    // } else if (currentLikes === 1 && localStorage.getItem(userid)) {
-    //   currentLikes--;
-    //   const likesRef = ref(database, `Endorsements/${itemid}/likes`);
-
-    //   set(likesRef, `♡ ${currentLikes}`);
-    //   span2.textContent = `♡ ${currentLikes}`;
-
-    //   localStorage.removeItem(userid);
-    // } else if (currentLikes === 1 && !localStorage.getItem(userid)) {
-    //   currentLikes++;
-    //   const likesRef = ref(database, `Endorsements/${itemid}/likes`);
-
-    //   set(likesRef, `🖤 ${currentLikes}`);
-
-    //   span2.textContent = `🖤 ${currentLikes}`;
-
-    //   localStorage.setItem(userid, "liked");
-    // } else if (currentLikes > 1 && localStorage.getItem(userid)) {
-    //   currentLikes--;
-    //   const likesRef = ref(database, `Endorsements/${itemid}/likes`);
-
-    //   set(likesRef, `♡ ${currentLikes}`);
-
-    //   span2.textContent = `♡ ${currentLikes}`;
-    //   localStorage.removeItem(userid);
-    // } else if (currentLikes > 1 && !localStorage.getItem(userid)) {
-    //   currentLikes++;
-    //   const likesRef = ref(database, `Endorsements/${itemid}/likes`);
-
-    //   set(likesRef, `🖤 ${currentLikes}`);
-
-    //   span2.textContent = `🖤 ${currentLikes}`;
-    //   localStorage.setItem(userid, "liked");
-    // }
   });
 
   newElMsg.addEventListener("dblclick", function () {
