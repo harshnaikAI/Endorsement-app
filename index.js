@@ -166,9 +166,9 @@ function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
 
       set(likesRef, `🖤 ${currentLikes}`);
 
-      span2.textContent = `🖤 ${currentLikes}`;
-
       localStorage.setItem(itemid, "liked");
+
+      span2.textContent = `🖤 ${currentLikes}`;
     } else {
       currentLikes--;
 
@@ -180,6 +180,9 @@ function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
 
       localStorage.removeItem(itemid);
     }
+
+    var showing = currentLikes;
+    span2.textContent = `♡ ${showing}`;
 
     ///////////////
 
