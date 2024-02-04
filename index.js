@@ -154,6 +154,19 @@ function render(itemid, msg, from, to, likes, RandomID) {
       span2.textContent = `🖤`;
 
       localStorage.removeItem(itemid);
+    } else if (currentLikes === 1 && !localStorage.getItem(itemid)) {
+      currentLikes++;
+      const likesRef = ref(database, `Endorsements/${itemid}/likes`);
+
+      set(likesRef, `🖤 ${currentLikes}`);
+
+      span2.textContent = `🖤 ${currentLikes}`;
+
+      localStorage.setItem(itemid, "liked");
+    } else if (currentLikes > 1 && localStorage.getItem(itemid)) {
+      currentLikes--;
+    } else if (currentLikes > 1 && !localStorage.getItem(itemid)) {
+      currentLikes++;
     }
 
     console.log(itemid);
