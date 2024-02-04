@@ -193,6 +193,7 @@ function render(itemid, msg, from, to, likes, RandomID) {
       remove(exactLocation);
       console.log("hel");
       localStorage.removeItem(RandomID);
+      localStorage.removeItem(itemid);
     }
   });
 }
