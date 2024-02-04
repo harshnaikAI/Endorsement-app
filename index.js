@@ -185,12 +185,14 @@ function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
 
   newElMsg.addEventListener("dblclick", function () {
     if (localStorage.getItem(RandomID)) {
-      let exactLocation = ref(database, `Endorsements/${itemid}`);
+      if (confirm("Are you sure you want to delete?")) {
+        let exactLocation = ref(database, `Endorsements/${itemid}`);
 
-      remove(exactLocation);
+        remove(exactLocation);
 
-      localStorage.removeItem(RandomID);
-      localStorage.removeItem(itemid);
+        localStorage.removeItem(RandomID);
+        localStorage.removeItem(itemid);
+      }
     }
   });
 }
