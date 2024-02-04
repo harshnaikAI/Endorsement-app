@@ -69,6 +69,8 @@ button.addEventListener("click", function () {
       randomid: randomID,
     });
 
+    localStorage.setItem(randomID, "done");
+
     clearInput();
   }
 });
@@ -130,8 +132,6 @@ function render(itemid, msg, from, to, likes, RandomID) {
 
   span2.id = itemid;
 
-  localStorage.setItem(RandomID, "done");
-
   span2.addEventListener("click", function () {
     let currentLikesString = span2.textContent.trim().substring(2);
     let currentLikes = currentLikesString ? parseInt(currentLikesString) : 0;
@@ -186,6 +186,7 @@ function render(itemid, msg, from, to, likes, RandomID) {
 
   newElMsg.addEventListener("dblclick", function () {
     console.log("hekrjek");
+
     if (localStorage.getItem(RandomID)) {
       let exactLocation = ref(database, `Endorsements/${itemid}`);
 
