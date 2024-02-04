@@ -30,6 +30,17 @@ const from = document.getElementById("from");
 
 const to = document.getElementById("to");
 
+let userid;
+if (!localStorage.getItem("userid")) {
+  // If there's no userid in localStorage, generate a new one.
+  userid =
+    "id-" + Math.random().toString(36).substr(2, 16) + Date.now().toString(36);
+  localStorage.setItem("userid", userid);
+} else {
+  // If there's already a userid in localStorage, use that one.
+  userid = localStorage.getItem("userid");
+}
+
 function clearInput() {
   msg.value = "";
   from.value = "";
@@ -55,7 +66,7 @@ button.addEventListener("click", function () {
   let msgValue = msg.value;
   let fromValue = `From ${from.value}`;
   let toValue = `To ${to.value}`;
-  let span2Value = `🖤`;
+  let span2Value = `♡ 0`;
   let randomID = `id-${Math.random()
     .toString(36)
     .substr(2, 16)}${Date.now().toString(36)}`;
@@ -136,7 +147,7 @@ function render(itemid, msg, from, to, likes, RandomID) {
     let currentLikesString = span2.textContent.trim().substring(2);
     let currentLikes = currentLikesString ? parseInt(currentLikesString) : 0;
 
-    if (currentLikes === 0 && !localStorage.getItem(itemid)) {
+    if (currentLikes === 0 && !localStorage.getItem(userid)) {
       currentLikes++;
 
       const likesRef = ref(database, `Endorsements/${itemid}/likes`);
@@ -145,16 +156,16 @@ function render(itemid, msg, from, to, likes, RandomID) {
 
       span2.textContent = `🖤 ${currentLikes}`;
 
-      localStorage.setItem(itemid, "liked");
-    } else if (currentLikes === 1 && localStorage.getItem(itemid)) {
+      localStorage.setItem(userid, "liked");
+    } else if (currentLikes === 1 && localStorage.getItem(userid)) {
       currentLikes--;
       const likesRef = ref(database, `Endorsements/${itemid}/likes`);
 
-      set(likesRef, `🖤`);
-      span2.textContent = `🖤`;
+      set(likesRef, `♡ ${currentLikes}`);
+      span2.textContent = `♡ ${currentLikes}`;
 
-      localStorage.removeItem(itemid);
-    } else if (currentLikes === 1 && !localStorage.getItem(itemid)) {
+      localStorage.removeItem(userid);
+    } else if (currentLikes === 1 && !localStorage.getItem(userid)) {
       currentLikes++;
       const likesRef = ref(database, `Endorsements/${itemid}/likes`);
 
@@ -162,38 +173,34 @@ function render(itemid, msg, from, to, likes, RandomID) {
 
       span2.textContent = `🖤 ${currentLikes}`;
 
-      localStorage.setItem(itemid, "liked");
-    } else if (currentLikes > 1 && localStorage.getItem(itemid)) {
+      localStorage.setItem(userid, "liked");
+    } else if (currentLikes > 1 && localStorage.getItem(userid)) {
       currentLikes--;
       const likesRef = ref(database, `Endorsements/${itemid}/likes`);
 
-      set(likesRef, `🖤 ${currentLikes}`);
+      set(likesRef, `♡ ${currentLikes}`);
 
-      span2.textContent = `🖤 ${currentLikes}`;
-      localStorage.removeItem(itemid);
-    } else if (currentLikes > 1 && !localStorage.getItem(itemid)) {
+      span2.textContent = `♡ ${currentLikes}`;
+      localStorage.removeItem(userid);
+    } else if (currentLikes > 1 && !localStorage.getItem(userid)) {
       currentLikes++;
       const likesRef = ref(database, `Endorsements/${itemid}/likes`);
 
       set(likesRef, `🖤 ${currentLikes}`);
 
       span2.textContent = `🖤 ${currentLikes}`;
-      localStorage.setItem(itemid, "liked");
+      localStorage.setItem(userid, "liked");
     }
-
-    console.log(itemid);
   });
 
   newElMsg.addEventListener("dblclick", function () {
-    console.log("hekrjek");
-
     if (localStorage.getItem(RandomID)) {
       let exactLocation = ref(database, `Endorsements/${itemid}`);
 
       remove(exactLocation);
-      console.log("hel");
+
       localStorage.removeItem(RandomID);
-      localStorage.removeItem(itemid);
+      localStorage.removeItem(userid);
     }
   });
 }
