@@ -110,6 +110,7 @@ onValue(endorsementInDB, function (snapshot) {
       let itemLikes = item[1].likes;
       let itemRandomID = item[1].randomid;
       let itemCurrentLikeStatus = item[1].likeStatusInDB;
+
       render(
         itemID,
         itemMsg,
@@ -180,9 +181,6 @@ function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
 
       localStorage.removeItem(itemid);
     }
-
-    var showing = currentLikes;
-    span2.textContent = `♡ ${showing}`;
 
     ///////////////
 
