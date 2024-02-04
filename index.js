@@ -35,10 +35,10 @@ if (!localStorage.getItem("userid")) {
   // If there's no userid in localStorage, generate a new one.
   userid =
     "id-" + Math.random().toString(36).substr(2, 16) + Date.now().toString(36);
-  localStorage.setItem("userid", userid);
+  localStorage.setItem("user", userid);
 } else {
   // If there's already a userid in localStorage, use that one.
-  userid = localStorage.getItem("userid");
+  userid = localStorage.getItem("user");
 }
 
 function clearInput() {
@@ -71,6 +71,8 @@ button.addEventListener("click", function () {
     .toString(36)
     .substr(2, 16)}${Date.now().toString(36)}`;
 
+  let likeStatus = false;
+
   if (msgValue !== "") {
     push(endorsementInDB, {
       message: msgValue,
@@ -78,6 +80,7 @@ button.addEventListener("click", function () {
       to: toValue,
       likes: span2Value,
       randomid: randomID,
+      likeStatusInDB: likeStatus,
     });
 
     localStorage.setItem(randomID, "done");
@@ -106,12 +109,21 @@ onValue(endorsementInDB, function (snapshot) {
       let itemTo = item[1].to;
       let itemLikes = item[1].likes;
       let itemRandomID = item[1].randomid;
-      render(itemID, itemMsg, itemFrom, itemTo, itemLikes, itemRandomID);
+      let itemCurrentLikeStatus = item[1].likeStatusInDB;
+      render(
+        itemID,
+        itemMsg,
+        itemFrom,
+        itemTo,
+        itemLikes,
+        itemRandomID,
+        itemCurrentLikeStatus
+      );
     }
   } else clearEndorsements();
 });
 
-function render(itemid, msg, from, to, likes, RandomID) {
+function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
   const newElLi = document.createElement("li");
   const newElfrom = document.createElement("div");
   const newElto = document.createElement("div");
@@ -147,7 +159,7 @@ function render(itemid, msg, from, to, likes, RandomID) {
     let currentLikesString = span2.textContent.trim().substring(2);
     let currentLikes = currentLikesString ? parseInt(currentLikesString) : 0;
 
-    if (currentLikes === 0 && !localStorage.getItem(userid)) {
+    if (!localStorage.getItem(itemid)) {
       currentLikes++;
 
       const likesRef = ref(database, `Endorsements/${itemid}/likes`);
@@ -156,41 +168,73 @@ function render(itemid, msg, from, to, likes, RandomID) {
 
       span2.textContent = `🖤 ${currentLikes}`;
 
-      localStorage.setItem(userid, "liked");
-    } else if (currentLikes === 1 && localStorage.getItem(userid)) {
+      localStorage.setItem(itemid, "liked");
+    } else {
       currentLikes--;
-      const likesRef = ref(database, `Endorsements/${itemid}/likes`);
 
-      set(likesRef, `♡ ${currentLikes}`);
-      span2.textContent = `♡ ${currentLikes}`;
-
-      localStorage.removeItem(userid);
-    } else if (currentLikes === 1 && !localStorage.getItem(userid)) {
-      currentLikes++;
-      const likesRef = ref(database, `Endorsements/${itemid}/likes`);
-
-      set(likesRef, `🖤 ${currentLikes}`);
-
-      span2.textContent = `🖤 ${currentLikes}`;
-
-      localStorage.setItem(userid, "liked");
-    } else if (currentLikes > 1 && localStorage.getItem(userid)) {
-      currentLikes--;
       const likesRef = ref(database, `Endorsements/${itemid}/likes`);
 
       set(likesRef, `♡ ${currentLikes}`);
 
       span2.textContent = `♡ ${currentLikes}`;
-      localStorage.removeItem(userid);
-    } else if (currentLikes > 1 && !localStorage.getItem(userid)) {
-      currentLikes++;
-      const likesRef = ref(database, `Endorsements/${itemid}/likes`);
 
-      set(likesRef, `🖤 ${currentLikes}`);
-
-      span2.textContent = `🖤 ${currentLikes}`;
-      localStorage.setItem(userid, "liked");
+      localStorage.removeItem(itemid);
     }
+
+    ///////////////
+
+    // currentLikes++;
+    // const likesRef = ref(database, `Endorsements/${itemid}/likes`);
+
+    // set(likesRef, `🖤 ${currentLikes}`);
+
+    // span2.textContent = `🖤 ${currentLikes}`;
+
+    //////////////////
+    // if (currentLikes === 0 && !localStorage.getItem(userid)) {
+    //   currentLikes++;
+
+    //   const likesRef = ref(database, `Endorsements/${itemid}/likes`);
+
+    //   set(likesRef, `🖤 ${currentLikes}`);
+
+    //   span2.textContent = `🖤 ${currentLikes}`;
+
+    //   localStorage.setItem(userid, "liked");
+    // } else if (currentLikes === 1 && localStorage.getItem(userid)) {
+    //   currentLikes--;
+    //   const likesRef = ref(database, `Endorsements/${itemid}/likes`);
+
+    //   set(likesRef, `♡ ${currentLikes}`);
+    //   span2.textContent = `♡ ${currentLikes}`;
+
+    //   localStorage.removeItem(userid);
+    // } else if (currentLikes === 1 && !localStorage.getItem(userid)) {
+    //   currentLikes++;
+    //   const likesRef = ref(database, `Endorsements/${itemid}/likes`);
+
+    //   set(likesRef, `🖤 ${currentLikes}`);
+
+    //   span2.textContent = `🖤 ${currentLikes}`;
+
+    //   localStorage.setItem(userid, "liked");
+    // } else if (currentLikes > 1 && localStorage.getItem(userid)) {
+    //   currentLikes--;
+    //   const likesRef = ref(database, `Endorsements/${itemid}/likes`);
+
+    //   set(likesRef, `♡ ${currentLikes}`);
+
+    //   span2.textContent = `♡ ${currentLikes}`;
+    //   localStorage.removeItem(userid);
+    // } else if (currentLikes > 1 && !localStorage.getItem(userid)) {
+    //   currentLikes++;
+    //   const likesRef = ref(database, `Endorsements/${itemid}/likes`);
+
+    //   set(likesRef, `🖤 ${currentLikes}`);
+
+    //   span2.textContent = `🖤 ${currentLikes}`;
+    //   localStorage.setItem(userid, "liked");
+    // }
   });
 
   newElMsg.addEventListener("dblclick", function () {
@@ -200,7 +244,7 @@ function render(itemid, msg, from, to, likes, RandomID) {
       remove(exactLocation);
 
       localStorage.removeItem(RandomID);
-      localStorage.removeItem(userid);
+      localStorage.removeItem(itemid);
     }
   });
 }
