@@ -7,6 +7,7 @@ import {
   push,
   onValue,
   remove,
+  get,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 
 const appSettings = {
@@ -29,17 +30,6 @@ const ulEl = document.getElementById("list");
 const from = document.getElementById("from");
 
 const to = document.getElementById("to");
-
-let userid;
-if (!localStorage.getItem("userid")) {
-  // If there's no userid in localStorage, generate a new one.
-  userid =
-    "id-" + Math.random().toString(36).substr(2, 16) + Date.now().toString(36);
-  localStorage.setItem("user", userid);
-} else {
-  // If there's already a userid in localStorage, use that one.
-  userid = localStorage.getItem("user");
-}
 
 function clearInput() {
   msg.value = "";
@@ -157,30 +147,36 @@ function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
   span2.id = itemid;
 
   span2.addEventListener("click", function () {
-    let currentLikesString = span2.textContent.trim().substring(2);
-    let currentLikes = currentLikesString ? parseInt(currentLikesString) : 0;
+    const likesRef = ref(database, `Endorsements/${itemid}/likes`);
+    get(likesRef).then((snapshot) => {
+      let value = snapshot.val();
+      console.log(value);
 
-    if (!localStorage.getItem(itemid)) {
-      currentLikes++;
+      let currentLikesString = value.trim().substring(2);
+      let currentLikes = currentLikesString ? parseInt(currentLikesString) : 0;
 
-      const likesRef = ref(database, `Endorsements/${itemid}/likes`);
+      if (!localStorage.getItem(itemid)) {
+        currentLikes++;
 
-      set(likesRef, `♡ ${currentLikes}`);
+        const likesRef = ref(database, `Endorsements/${itemid}/likes`);
 
-      localStorage.setItem(itemid, "liked");
+        set(likesRef, `♡ ${currentLikes}`);
 
-      span2.textContent = `♡ ${currentLikes}`;
-    } else {
-      currentLikes--;
+        localStorage.setItem(itemid, "liked");
 
-      const likesRef = ref(database, `Endorsements/${itemid}/likes`);
+        span2.textContent = `♡ ${currentLikes}`;
+      } else {
+        currentLikes--;
 
-      set(likesRef, `♡ ${currentLikes}`);
+        const likesRef = ref(database, `Endorsements/${itemid}/likes`);
 
-      span2.textContent = `♡ ${currentLikes}`;
+        set(likesRef, `♡ ${currentLikes}`);
 
-      localStorage.removeItem(itemid);
-    }
+        span2.textContent = `♡ ${currentLikes}`;
+
+        localStorage.removeItem(itemid);
+      }
+    });
   });
 
   newElMsg.addEventListener("dblclick", function () {
