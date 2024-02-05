@@ -111,7 +111,11 @@ onValue(endorsementInDB, function (snapshot) {
         itemCurrentLikeStatus
       );
     }
-  } else clearEndorsements();
+  } else {
+    clearEndorsements();
+
+    localStorage.clear();
+  }
 });
 
 function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
