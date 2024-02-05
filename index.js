@@ -186,6 +186,7 @@ function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
   newElMsg.addEventListener("dblclick", function () {
     if (localStorage.getItem(RandomID)) {
       if (confirm("Are you sure you want to delete?")) {
+        newElLi.remove();
         let exactLocation = ref(database, `Endorsements/${itemid}`);
 
         remove(exactLocation);
