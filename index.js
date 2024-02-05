@@ -150,6 +150,18 @@ function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
 
   span2.id = itemid;
 
+  const MsgRef = ref(database, `Endorsements/${itemid}`);
+
+  onValue(MsgRef, (snapshot) => {
+    const data = snapshot.val();
+
+    if (data && Object.keys(data).length === 1 && "likes" in data) {
+      remove(MsgRef);
+    } else if (data === null) {
+      newElLi.remove();
+    }
+  });
+
   let isLikedButtonDisabled = false;
 
   span2.addEventListener("click", function () {
