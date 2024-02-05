@@ -150,7 +150,15 @@ function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
 
   span2.id = itemid;
 
+  let isLikedButtonDisabled = false;
+
   span2.addEventListener("click", function () {
+    if (isLikedButtonDisabled) {
+      return;
+    }
+
+    isLikedButtonDisabled = true;
+
     const likesRef = ref(database, `Endorsements/${itemid}/likes`);
     get(likesRef).then((snapshot) => {
       let value = snapshot.val();
@@ -164,7 +172,9 @@ function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
 
         const likesRef = ref(database, `Endorsements/${itemid}/likes`);
 
-        set(likesRef, `♡ ${currentLikes}`);
+        set(likesRef, `♡ ${currentLikes}`).then(() => {
+          isLikedButtonDisabled = false;
+        });
 
         localStorage.setItem(itemid, "liked");
 
@@ -174,7 +184,9 @@ function render(itemid, msg, from, to, likes, RandomID, likeStatus) {
 
         const likesRef = ref(database, `Endorsements/${itemid}/likes`);
 
-        set(likesRef, `♡ ${currentLikes}`);
+        set(likesRef, `♡ ${currentLikes}`).then(() => {
+          isLikedButtonDisabled = false;
+        });
 
         span2.textContent = `♡ ${currentLikes}`;
 
