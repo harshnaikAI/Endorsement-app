@@ -5,7 +5,7 @@ Solo project from Scrimba's Build a Mobile App with Firebase course.
    - Users can Delete there own Endorsements by double click on Msessage section.
    - Scroll feature.
    - Mobile friendly design and user can use it like an app on their mobile.
-   - Technology used- HTML, CSS, JS, browsers local storage, Firebase.
+   - Technology used- HTML, CSS, JS, Browsers local storage, Firebase.
      
 2. Screen-Shot
    
