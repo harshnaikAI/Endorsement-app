@@ -110,7 +110,6 @@ ul li {
   font-weight: 400;
   color: #1b1924;
   overflow-wrap: break-word;
-  word-break: break-all;
   text-align: start;
   display: flex;
   flex-direction: column;
