@@ -1,5 +1,8 @@
 # We are the Champions
 Solo project from Scrimba's Build a Mobile App with Firebase course.
+
+An Endorsement website, where user can add / delete and like / unlike the Endorsements.
+
 1. Key features
    - Like and Unlike once per browser.
    - Users can Delete there own Endorsements by double click on Msessage section.
