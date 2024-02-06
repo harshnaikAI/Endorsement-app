@@ -1,4 +1,4 @@
-#We are the Champions
+# We are the Champions
 Solo project from Scrimba's Build a Mobile App with Firebase course.
-##Link
+## Link
 https://endorsement-harsh-app.netlify.app/
